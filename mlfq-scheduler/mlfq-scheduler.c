@@ -14,6 +14,8 @@ within queues.
 
 #define RESET_TIMESTEP 50
 
+#define ASSERTS_ENABLED (argc == 3 && argv[2] != "0")
+
 struct Queue {
   int allotment;
   struct Job* head;
@@ -85,6 +87,29 @@ void CompleteJob(struct Job* job)
   
 }
 
+static void AssertJobCounts(void)
+{
+  int i;
+  int counter;
+  struct Job* cur = NULL;
+  
+  
+  for (i = 0; i < QUEUE_COUNT; i++)
+    {
+      counter = 0;
+
+      cur = sQueues[i].head;
+
+      while(cur != NULL)
+	{
+	  counter++;
+	  cur = cur->next;
+	}
+
+      assert(counter == sQueues[i].numJobs);
+    }
+}
+
 int main(int argc, char *argv[])
 {
   while(1)
@@ -92,9 +117,13 @@ int main(int argc, char *argv[])
   switch(sMainState)
     {
     case 0:
-      if (argc != 2)
+      if ASSERTS_ENABLED
 	{
-	  fprintf(stderr, "Usage: mlfq <csv-with-job-info>\n");
+	  printf("Assertions ENABLED\n");
+	}
+      if (argc != 2 && argc != 3)
+	{
+	  fprintf(stderr, "Usage: mlfq <csv-with-job-info> (enable-asserts)\n");
 	  return(1);
 	}
       sMainState++;
@@ -163,6 +192,13 @@ int main(int argc, char *argv[])
       sMainState++;
       break;
     case 4:
+      // This case asserts that jobs exist in queues as expected.
+      if ASSERTS_ENABLED
+	{
+	  AssertJobCounts();
+	}
+      sMainState++;
+      break;
     case 5:
       return(0); // Completed without error.
     }
