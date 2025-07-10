@@ -21,6 +21,7 @@ struct Queue {
 };
 
 struct Job {
+  int jobId; // Mostly used to make logging easier.
   int timeInQueue;
   struct Job* next;
   // Simulation-related - these are set values that would not be present in a
@@ -44,6 +45,35 @@ static FILE* fptr = NULL;
 
 void ResetJobs(void)
 {
+  int i;
+  struct Job* last = NULL;
+  struct Job* cur = NULL;
+  
+  for (i = 0; i < QUEUE_COUNT; i++)
+    {
+      sQueues[i].numJobs = 0;
+      if (sQueues[i].head != NULL)
+	{
+	  cur = sQueues[i].head;
+	  if (sQueues[0].head == NULL && last == NULL) // Need to set [0]'s head
+	    {
+	      sQueues[0].head = cur;
+	    }
+	  while(cur != NULL)
+	    {
+	      printf("Job %d returned to queue 0 and time in queue set to 0\n", sQueues[0].numJobs);
+	      sQueues[0].numJobs++;
+	      cur->timeInQueue = 0; // Reset time used
+	      if (last != NULL)
+		{
+		  last->next = cur;
+		}
+	      last = cur;
+	      cur = cur->next;
+	    }
+	}
+    }
+  last->next = NULL; // Very last job
 }
 
 void AddJobToQueue(struct Job*, int queueNum)
@@ -58,13 +88,13 @@ void CompleteJob(struct Job* job)
 int main(int argc, char *argv[])
 {
   while(1)
-    {
+ {
   switch(sMainState)
     {
     case 0:
       if (argc != 2)
 	{
-	  printf("Usage: mlfq <csv-with-job-info>\n");
+	  fprintf(stderr, "Usage: mlfq <csv-with-job-info>\n");
 	  return(1);
 	}
       sMainState++;
@@ -74,7 +104,7 @@ int main(int argc, char *argv[])
 
       if (fptr == NULL)
 	{
-	  printf("Error: file could not be opened\n");
+	  fprintf(stderr, "Error: file could not be opened\n");
 	  return(2);
 	}
       sMainState++;
@@ -82,6 +112,7 @@ int main(int argc, char *argv[])
     case 2:
       char readBuffer[20];
       struct Job* lastJob = NULL;
+      int counter = 0;
 
       char* tokPtr;
 
@@ -89,20 +120,21 @@ int main(int argc, char *argv[])
 	struct Job* curJob = malloc(sizeof(struct Job));
 	if (curJob == NULL)
 	  {
-	    printf("Error: malloc failed for job.");
+	    fprintf(stderr, "Error: malloc failed for job.");
 	    return(5);
 	  }
+	curJob->jobId = counter;
       tokPtr = strtok(readBuffer, ",");
       if (tokPtr == NULL)
 	{
-	  printf("Line format: <runTime>,<entryTime>\n");
+	  fprintf(stderr, "Line format: <runTime>,<entryTime>\n");
 	  return(3);
 	}
       curJob->runTime = atoi(tokPtr);
       tokPtr = strtok(NULL, ",");
       if (tokPtr == NULL)
 	{
-	  printf("Line format: <runTime>,<entryTime>\n");
+	  fprintf(stderr, "Line format: <runTime>,<entryTime>\n");
 	  return(4);
 	}
       curJob->entryTime = atoi(tokPtr);
@@ -117,8 +149,9 @@ int main(int argc, char *argv[])
 	}
 
       sQueues[0].numJobs++;
+      counter++;
 
-      printf("Job loaded: runTime %d, entryTime %d\n", curJob->runTime, curJob->entryTime);
+      printf("Job %d loaded: runTime %d, entryTime %d\n", curJob->jobId, curJob->runTime, curJob->entryTime);
 	    
       lastJob = curJob;
       }
@@ -126,6 +159,11 @@ int main(int argc, char *argv[])
       sMainState++;
       break;
     case 3:
+      ResetJobs();
+      sMainState++;
+      break;
+    case 4:
+    case 5:
       return(0); // Completed without error.
     }
     }
