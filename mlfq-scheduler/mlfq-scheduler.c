@@ -59,6 +59,7 @@ static void ResetJobs(void)
       if (sQueues[i].head != NULL)
 	{
 	  cur = sQueues[i].head;
+	  sQueues[i].head = NULL;
 	  if (sQueues[0].head == NULL && last == NULL) // Need to set [0]'s head
 	    {
 	      sQueues[0].head = cur;
@@ -127,62 +128,66 @@ static int CompleteJob(struct Job* cur)
 static int DowngradeJob(struct Job* cur)
 {
   int i;
-  struct Job* prev = NULL;
+  struct Job* prev;
+  int q = -1;
 
   for (i = 0; i < QUEUE_COUNT; i++)
     {
-	  prev = sQueues[i].head;
+      struct Job* head = sQueues[i].head;
 
-	  if (prev == cur)
+      if (head == NULL)
+	continue;
+
+      if (head == cur)
+	{
+	  sQueues[i].head = cur->next;
+	  sQueues[i].numJobs--;
+	  q = i;
+	  break;
+	}
+
+      prev = head;
+      while (prev->next != NULL)
+	{
+	  if (prev->next == cur)
 	    {
-	      sQueues[i].head = cur->next;
+	      prev->next = cur->next;
+	      sQueues[i].numJobs--;
+	      q = i;
 	      break;
 	    }
+	  prev = prev->next;
+	}
 
-	  while(prev != NULL)
-	    {
-	      if (prev->next == cur)
-		{
-		  prev->next = cur->next;
-		  break;
-		}
-	      prev = prev->next;
-	    }
-
-	  if (prev != NULL)
-	    break;
+      if (q != 1)
+	break;
     }
-  if (prev == NULL)
+  if (q == -1)
     {
       return(1); // Could not find job to downgrade
     }
-  if (i == QUEUE_COUNT)
+  if (q + 1 >= QUEUE_COUNT)
     {
       return(2); // Downgrading would put us OOB
     }
 
-  sQueues[i].numJobs--;
-  sQueues[i+1].numJobs++;
+  cur->next = NULL;
+  cur->timeInQueue = 0;
 
-  prev = sQueues[i+1].head;
-
-  if (prev == NULL)
+  prev = sQueues[q+1].head;
+  if(sQueues[q+1].head == NULL)
     {
-      sQueues[i+1].head = cur;
+      sQueues[q+1].head = cur;
     }
   else
     {
-      fprintf(outptr, "Go into job %d at %p\n", prev->jobId, prev);
-      fflush(stdout);
-      while(prev->next != NULL)
-	{
-	  prev = prev->next;
-	}
-        prev->next = cur;
+      prev = sQueues[q+1].head;
+      while (prev->next != NULL)
+	prev = prev->next;
+      prev->next = cur;
     }
 
-  cur->timeInQueue = 0;
-  cur->next = NULL;
+  sQueues[q+1].numJobs++;
   
   fprintf(outptr, "Job %d downgraded to queue %d.\n", cur->jobId, i+1);
   return(0);
@@ -302,6 +307,7 @@ int main(int argc, char *argv[])
 
       for (counter = 0; counter < QUEUE_COUNT; counter++)
 	{
+	  fprintf(outptr, "Queue %d head %p", counter, sQueues[counter].head);
 	  sQueues[counter].allotment = (counter+1)*10;
 	}
       counter = 0;
