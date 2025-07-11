@@ -45,7 +45,9 @@ static int sMainState = 0;
 
 static FILE* fptr = NULL;
 
-void ResetJobs(void)
+static FILE* outptr;
+
+static void ResetJobs(void)
 {
   int i;
   struct Job* last = NULL;
@@ -63,13 +65,20 @@ void ResetJobs(void)
 	    }
 	  while(cur != NULL)
 	    {
-	      printf("Job %d returned to queue 0 and time in queue set to 0\n", sQueues[0].numJobs);
+	      fprintf(outptr, "Job %d returned to queue 0 and time in queue set to 0\n", cur->jobId);
+	      
 	      sQueues[0].numJobs++;
 	      cur->timeInQueue = 0; // Reset time used
+
 	      if (last != NULL)
 		{
 		  last->next = cur;
 		}
+	      else
+		{
+		  sQueues[0].head = cur;
+		}
+	      
 	      last = cur;
 	      cur = cur->next;
 	    }
@@ -78,13 +87,151 @@ void ResetJobs(void)
   last->next = NULL; // Very last job
 }
 
-void AddJobToQueue(struct Job*, int queueNum)
+static void AddJobToQueue(struct Job*, int queueNum)
 {
 }
 
-void CompleteJob(struct Job* job)
+static int CompleteJob(struct Job* cur)
 {
+  int i;
+  struct Job* prev = NULL;
+
+  for (i = 0; i < QUEUE_COUNT; i++)
+    {
+	  if (sQueues[i].head == cur)
+	    {
+	      sQueues[i].head = cur->next;
+	      sQueues[i].numJobs--;
+	      fprintf(outptr, "Job %d completed.\n", cur->jobId);
+	      free(cur);
+	      return(0);
+	    }
+
+	  prev = sQueues[i].head;
+	  while(prev != NULL && prev->next != NULL)
+	    {
+	      if (prev->next == cur)
+		{
+		  prev->next = cur->next;
+		  sQueues[i].numJobs--;
+		  fprintf(outptr, "Job %d completed.\n", cur->jobId);
+		  free(cur);
+		  return(0);
+		}
+	      prev = prev->next;
+	    }
+    }
+  return(1); // Could not find job to remove
+}
+
+static int DowngradeJob(struct Job* cur)
+{
+  int i;
+  struct Job* prev = NULL;
+
+  for (i = 0; i < QUEUE_COUNT; i++)
+    {
+	  prev = sQueues[i].head;
+
+	  if (prev == cur)
+	    {
+	      sQueues[i].head = cur->next;
+	      break;
+	    }
+
+	  while(prev != NULL)
+	    {
+	      if (prev->next == cur)
+		{
+		  prev->next = cur->next;
+		  break;
+		}
+	      prev = prev->next;
+	    }
+
+	  if (prev != NULL)
+	    break;
+    }
+  if (prev == NULL)
+    {
+      return(1); // Could not find job to downgrade
+    }
+  if (i == QUEUE_COUNT)
+    {
+      return(2); // Downgrading would put us OOB
+    }
+
+  sQueues[i].numJobs--;
+  sQueues[i+1].numJobs++;
+
+  prev = sQueues[i+1].head;
+
+  if (prev == NULL)
+    {
+      sQueues[i+1].head = cur;
+    }
+  else
+    {
+      fprintf(outptr, "Go into job %d at %p\n", prev->jobId, prev);
+      fflush(stdout);
+      while(prev->next != NULL)
+	{
+	  prev = prev->next;
+	}
+        prev->next = cur;
+    }
+
+  cur->timeInQueue = 0;
+  cur->next = NULL;
   
+  fprintf(outptr, "Job %d downgraded to queue %d.\n", cur->jobId, i+1);
+  return(0);
+}
+
+static int RunMLFQScheduler(void)
+{
+  int i, skips, numJobs;
+  struct Job* chosenJob;
+
+  for (i = 0; i < QUEUE_COUNT; i++)
+    {
+      if (sQueues[i].head != NULL)
+	{
+	  numJobs = sQueues[i].numJobs;
+	  // Get the index relative to jobs in the queue
+	  skips = sCounter % numJobs;
+
+	  chosenJob = sQueues[i].head;
+
+	  while(skips != 0)
+	    {
+	      skips--;
+	      chosenJob = chosenJob->next;
+	    }
+	  fprintf(outptr, "Chosen job at %p out of %d (skips: %d)\n", chosenJob, numJobs, skips);
+	  
+	  chosenJob->runTime--;
+	  chosenJob->timeInQueue++;
+
+	  fprintf(outptr, "Running job %d (runtime %d), has been in queue %d for %d counts. Total counts: %d\n",
+		 chosenJob->jobId, chosenJob->runTime, i, chosenJob->timeInQueue, sCounter);
+	  
+	  if(chosenJob->runTime == 0)
+	    {
+	      CompleteJob(chosenJob);
+	    }
+	  else if (chosenJob->timeInQueue >= sQueues[i].allotment)
+	    {
+	      DowngradeJob(chosenJob);
+	    }
+
+	  sCounter++;
+
+	  return 1; // We ran something.
+	}
+    }
+  
+  return 0; // No jobs to run, we are done.
 }
 
 static void AssertJobCounts(void)
@@ -121,15 +268,23 @@ int main(int argc, char *argv[])
 	{
 	  printf("Assertions ENABLED\n");
 	}
-      if (argc != 2 && argc != 3)
+      if (argc < 2 && argc > 4)
 	{
-	  fprintf(stderr, "Usage: mlfq <csv-with-job-info> (enable-asserts)\n");
+	  fprintf(stderr, "Usage: mlfq <csv-with-job-info> (enable-asserts) (out)\n");
 	  return(1);
 	}
       sMainState++;
       break;
     case 1:
       fptr = fopen(argv[1], "r");
+      if (argc == 4)
+	{
+	  outptr = fopen(argv[3], "w");
+	}
+      else
+	{
+	  outptr = stdout;
+	}
 
       if (fptr == NULL)
 	{
@@ -141,9 +296,15 @@ int main(int argc, char *argv[])
     case 2:
       char readBuffer[20];
       struct Job* lastJob = NULL;
-      int counter = 0;
+      int counter;
 
       char* tokPtr;
+
+      for (counter = 0; counter < QUEUE_COUNT; counter++)
+	{
+	  sQueues[counter].allotment = (counter+1)*10;
+	}
+      counter = 0;
 
       while (fgets(readBuffer, 20, fptr)) {
 	struct Job* curJob = malloc(sizeof(struct Job));
@@ -180,7 +341,7 @@ int main(int argc, char *argv[])
       sQueues[0].numJobs++;
       counter++;
 
-      printf("Job %d loaded: runTime %d, entryTime %d\n", curJob->jobId, curJob->runTime, curJob->entryTime);
+      fprintf(outptr, "Job %d loaded: runTime %d, entryTime %d\n", curJob->jobId, curJob->runTime, curJob->entryTime);
 	    
       lastJob = curJob;
       }
@@ -200,6 +361,17 @@ int main(int argc, char *argv[])
       sMainState++;
       break;
     case 5:
+      while (RunMLFQScheduler())
+	{
+	  if (sCounter % RESET_TIMESTEP == 0)
+	    {
+	      ResetJobs();
+	    }
+	  sMainState = 4;	  
+	}
+      sMainState++;
+      break;
+    case 6:
       return(0); // Completed without error.
     }
     }
