@@ -5,126 +5,237 @@ Job 3 loaded: runTime 5, entryTime 20
 Job 4 loaded: runTime 8, entryTime 5
 Job 5 loaded: runTime 50, entryTime 0
 Job 0 returned to queue 0 and time in queue set to 0
-Job 1 returned to queue 0 and time in queue set to 0
 Job 2 returned to queue 0 and time in queue set to 0
-Job 3 returned to queue 0 and time in queue set to 0
-Job 4 returned to queue 0 and time in queue set to 0
 Job 5 returned to queue 0 and time in queue set to 0
-Chosen job at 0xaedc4e5d44a0 out of 6 (skips: 0)
-Running job 0 (runtime 19), has been in queue 0 for 1 counts. Total counts: 0
-Chosen job at 0xaedc4e5d44c0 out of 6 (skips: 0)
-Running job 1 (runtime 14), has been in queue 0 for 1 counts. Total counts: 1
-Chosen job at 0xaedc4e5d44e0 out of 6 (skips: 0)
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 19), has been in queue 0 for 1 counts. Total counts: 1
+Chosen job at 0xbaaa6b3ab4e0 out of 3 (skips: 0)
 Running job 2 (runtime 9), has been in queue 0 for 1 counts. Total counts: 2
-Chosen job at 0xaedc4e5d4500 out of 6 (skips: 0)
-Running job 3 (runtime 4), has been in queue 0 for 1 counts. Total counts: 3
-Chosen job at 0xaedc4e5d4520 out of 6 (skips: 0)
-Running job 4 (runtime 7), has been in queue 0 for 1 counts. Total counts: 4
-Chosen job at 0xaedc4e5d4540 out of 6 (skips: 0)
-Running job 5 (runtime 49), has been in queue 0 for 1 counts. Total counts: 5
-Chosen job at 0xaedc4e5d44a0 out of 6 (skips: 0)
-Running job 0 (runtime 18), has been in queue 0 for 2 counts. Total counts: 6
-Chosen job at 0xaedc4e5d44c0 out of 6 (skips: 0)
-Running job 1 (runtime 13), has been in queue 0 for 2 counts. Total counts: 7
-Chosen job at 0xaedc4e5d44e0 out of 6 (skips: 0)
-Running job 2 (runtime 8), has been in queue 0 for 2 counts. Total counts: 8
-Chosen job at 0xaedc4e5d4500 out of 6 (skips: 0)
-Running job 3 (runtime 3), has been in queue 0 for 2 counts. Total counts: 9
-Chosen job at 0xaedc4e5d4520 out of 6 (skips: 0)
-Running job 4 (runtime 6), has been in queue 0 for 2 counts. Total counts: 10
-Chosen job at 0xaedc4e5d4540 out of 6 (skips: 0)
-Running job 5 (runtime 48), has been in queue 0 for 2 counts. Total counts: 11
-Chosen job at 0xaedc4e5d44a0 out of 6 (skips: 0)
-Running job 0 (runtime 17), has been in queue 0 for 3 counts. Total counts: 12
-Chosen job at 0xaedc4e5d44c0 out of 6 (skips: 0)
-Running job 1 (runtime 12), has been in queue 0 for 3 counts. Total counts: 13
-Chosen job at 0xaedc4e5d44e0 out of 6 (skips: 0)
-Running job 2 (runtime 7), has been in queue 0 for 3 counts. Total counts: 14
-Chosen job at 0xaedc4e5d4500 out of 6 (skips: 0)
-Running job 3 (runtime 2), has been in queue 0 for 3 counts. Total counts: 15
-Chosen job at 0xaedc4e5d4520 out of 6 (skips: 0)
-Running job 4 (runtime 5), has been in queue 0 for 3 counts. Total counts: 16
-Chosen job at 0xaedc4e5d4540 out of 6 (skips: 0)
-Running job 5 (runtime 47), has been in queue 0 for 3 counts. Total counts: 17
-Chosen job at 0xaedc4e5d44a0 out of 6 (skips: 0)
-Running job 0 (runtime 16), has been in queue 0 for 4 counts. Total counts: 18
-Chosen job at 0xaedc4e5d44c0 out of 6 (skips: 0)
-Running job 1 (runtime 11), has been in queue 0 for 4 counts. Total counts: 19
-Chosen job at 0xaedc4e5d44e0 out of 6 (skips: 0)
-Running job 2 (runtime 6), has been in queue 0 for 4 counts. Total counts: 20
-Chosen job at 0xaedc4e5d4500 out of 6 (skips: 0)
-Running job 3 (runtime 1), has been in queue 0 for 4 counts. Total counts: 21
-Chosen job at 0xaedc4e5d4520 out of 6 (skips: 0)
+Chosen job at 0xbaaa6b3ab540 out of 3 (skips: 0)
+Running job 5 (runtime 49), has been in queue 0 for 1 counts. Total counts: 3
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 18), has been in queue 0 for 2 counts. Total counts: 4
+Chosen job at 0xbaaa6b3ab4e0 out of 3 (skips: 0)
+Running job 2 (runtime 8), has been in queue 0 for 2 counts. Total counts: 5
+Job 4 entered queue 0.
+Chosen job at 0xbaaa6b3ab4e0 out of 4 (skips: 0)
+Running job 2 (runtime 7), has been in queue 0 for 3 counts. Total counts: 6
+Chosen job at 0xbaaa6b3ab540 out of 4 (skips: 0)
+Running job 5 (runtime 48), has been in queue 0 for 2 counts. Total counts: 7
+Chosen job at 0xbaaa6b3ab520 out of 4 (skips: 0)
+Running job 4 (runtime 7), has been in queue 0 for 1 counts. Total counts: 8
+Chosen job at 0xbaaa6b3ab4a0 out of 4 (skips: 0)
+Running job 0 (runtime 17), has been in queue 0 for 3 counts. Total counts: 9
+Chosen job at 0xbaaa6b3ab4e0 out of 4 (skips: 0)
+Running job 2 (runtime 6), has been in queue 0 for 4 counts. Total counts: 10
+Job 1 entered queue 0.
+Chosen job at 0xbaaa6b3ab4a0 out of 5 (skips: 0)
+Running job 0 (runtime 16), has been in queue 0 for 4 counts. Total counts: 11
+Chosen job at 0xbaaa6b3ab4e0 out of 5 (skips: 0)
+Running job 2 (runtime 5), has been in queue 0 for 5 counts. Total counts: 12
+Chosen job at 0xbaaa6b3ab540 out of 5 (skips: 0)
+Running job 5 (runtime 47), has been in queue 0 for 3 counts. Total counts: 13
+Chosen job at 0xbaaa6b3ab520 out of 5 (skips: 0)
+Running job 4 (runtime 6), has been in queue 0 for 2 counts. Total counts: 14
+Chosen job at 0xbaaa6b3ab4c0 out of 5 (skips: 0)
+Running job 1 (runtime 14), has been in queue 0 for 1 counts. Total counts: 15
+Chosen job at 0xbaaa6b3ab4a0 out of 5 (skips: 0)
+Running job 0 (runtime 15), has been in queue 0 for 5 counts. Total counts: 16
+Chosen job at 0xbaaa6b3ab4e0 out of 5 (skips: 0)
+Running job 2 (runtime 4), has been in queue 0 for 6 counts. Total counts: 17
+Chosen job at 0xbaaa6b3ab540 out of 5 (skips: 0)
+Running job 5 (runtime 46), has been in queue 0 for 4 counts. Total counts: 18
+Chosen job at 0xbaaa6b3ab520 out of 5 (skips: 0)
+Running job 4 (runtime 5), has been in queue 0 for 3 counts. Total counts: 19
+Chosen job at 0xbaaa6b3ab4c0 out of 5 (skips: 0)
+Running job 1 (runtime 13), has been in queue 0 for 2 counts. Total counts: 20
+Job 3 entered queue 0.
+Chosen job at 0xbaaa6b3ab540 out of 6 (skips: 0)
+Running job 5 (runtime 45), has been in queue 0 for 5 counts. Total counts: 21
+Chosen job at 0xbaaa6b3ab520 out of 6 (skips: 0)
 Running job 4 (runtime 4), has been in queue 0 for 4 counts. Total counts: 22
-Chosen job at 0xaedc4e5d4540 out of 6 (skips: 0)
-Running job 5 (runtime 46), has been in queue 0 for 4 counts. Total counts: 23
-Chosen job at 0xaedc4e5d44a0 out of 6 (skips: 0)
-Running job 0 (runtime 15), has been in queue 0 for 5 counts. Total counts: 24
-Chosen job at 0xaedc4e5d44c0 out of 6 (skips: 0)
-Running job 1 (runtime 10), has been in queue 0 for 5 counts. Total counts: 25
-Chosen job at 0xaedc4e5d44e0 out of 6 (skips: 0)
-Running job 2 (runtime 5), has been in queue 0 for 5 counts. Total counts: 26
-Chosen job at 0xaedc4e5d4500 out of 6 (skips: 0)
-Running job 3 (runtime 0), has been in queue 0 for 5 counts. Total counts: 27
-Job 3 completed.
-Chosen job at 0xaedc4e5d4520 out of 5 (skips: 0)
+Chosen job at 0xbaaa6b3ab4c0 out of 6 (skips: 0)
+Running job 1 (runtime 12), has been in queue 0 for 3 counts. Total counts: 23
+Chosen job at 0xbaaa6b3ab500 out of 6 (skips: 0)
+Running job 3 (runtime 4), has been in queue 0 for 1 counts. Total counts: 24
+Chosen job at 0xbaaa6b3ab4a0 out of 6 (skips: 0)
+Running job 0 (runtime 14), has been in queue 0 for 6 counts. Total counts: 25
+Chosen job at 0xbaaa6b3ab4e0 out of 6 (skips: 0)
+Running job 2 (runtime 3), has been in queue 0 for 7 counts. Total counts: 26
+Chosen job at 0xbaaa6b3ab540 out of 6 (skips: 0)
+Running job 5 (runtime 44), has been in queue 0 for 6 counts. Total counts: 27
+Chosen job at 0xbaaa6b3ab520 out of 6 (skips: 0)
 Running job 4 (runtime 3), has been in queue 0 for 5 counts. Total counts: 28
-Chosen job at 0xaedc4e5d4540 out of 5 (skips: 0)
-Running job 5 (runtime 45), has been in queue 0 for 5 counts. Total counts: 29
-Chosen job at 0xaedc4e5d44a0 out of 5 (skips: 0)
-Running job 0 (runtime 14), has been in queue 0 for 6 counts. Total counts: 30
-Chosen job at 0xaedc4e5d44c0 out of 5 (skips: 0)
-Running job 1 (runtime 9), has been in queue 0 for 6 counts. Total counts: 31
-Chosen job at 0xaedc4e5d44e0 out of 5 (skips: 0)
-Running job 2 (runtime 4), has been in queue 0 for 6 counts. Total counts: 32
-Chosen job at 0xaedc4e5d4520 out of 5 (skips: 0)
-Running job 4 (runtime 2), has been in queue 0 for 6 counts. Total counts: 33
-Chosen job at 0xaedc4e5d4540 out of 5 (skips: 0)
-Running job 5 (runtime 44), has been in queue 0 for 6 counts. Total counts: 34
-Chosen job at 0xaedc4e5d44a0 out of 5 (skips: 0)
-Running job 0 (runtime 13), has been in queue 0 for 7 counts. Total counts: 35
-Chosen job at 0xaedc4e5d44c0 out of 5 (skips: 0)
-Running job 1 (runtime 8), has been in queue 0 for 7 counts. Total counts: 36
-Chosen job at 0xaedc4e5d44e0 out of 5 (skips: 0)
-Running job 2 (runtime 3), has been in queue 0 for 7 counts. Total counts: 37
-Chosen job at 0xaedc4e5d4520 out of 5 (skips: 0)
-Running job 4 (runtime 1), has been in queue 0 for 7 counts. Total counts: 38
-Chosen job at 0xaedc4e5d4540 out of 5 (skips: 0)
-Running job 5 (runtime 43), has been in queue 0 for 7 counts. Total counts: 39
-Chosen job at 0xaedc4e5d44a0 out of 5 (skips: 0)
-Running job 0 (runtime 12), has been in queue 0 for 8 counts. Total counts: 40
-Chosen job at 0xaedc4e5d44c0 out of 5 (skips: 0)
-Running job 1 (runtime 7), has been in queue 0 for 8 counts. Total counts: 41
-Chosen job at 0xaedc4e5d44e0 out of 5 (skips: 0)
-Running job 2 (runtime 2), has been in queue 0 for 8 counts. Total counts: 42
-Chosen job at 0xaedc4e5d4520 out of 5 (skips: 0)
-Running job 4 (runtime 0), has been in queue 0 for 8 counts. Total counts: 43
-Job 4 completed.
-Chosen job at 0xaedc4e5d44a0 out of 4 (skips: 0)
-Running job 0 (runtime 11), has been in queue 0 for 9 counts. Total counts: 44
-Chosen job at 0xaedc4e5d44c0 out of 4 (skips: 0)
-Running job 1 (runtime 6), has been in queue 0 for 9 counts. Total counts: 45
-Chosen job at 0xaedc4e5d44e0 out of 4 (skips: 0)
-Running job 2 (runtime 1), has been in queue 0 for 9 counts. Total counts: 46
-Chosen job at 0xaedc4e5d4540 out of 4 (skips: 0)
-Running job 5 (runtime 42), has been in queue 0 for 8 counts. Total counts: 47
-Chosen job at 0xaedc4e5d44a0 out of 4 (skips: 0)
-Running job 0 (runtime 10), has been in queue 0 for 10 counts. Total counts: 48
-Job 0 downgraded to queue 1.
-Chosen job at 0xaedc4e5d44e0 out of 3 (skips: 0)
-Running job 2 (runtime 0), has been in queue 0 for 10 counts. Total counts: 49
+Chosen job at 0xbaaa6b3ab4c0 out of 6 (skips: 0)
+Running job 1 (runtime 11), has been in queue 0 for 4 counts. Total counts: 29
+Chosen job at 0xbaaa6b3ab500 out of 6 (skips: 0)
+Running job 3 (runtime 3), has been in queue 0 for 2 counts. Total counts: 30
+Chosen job at 0xbaaa6b3ab4a0 out of 6 (skips: 0)
+Running job 0 (runtime 13), has been in queue 0 for 7 counts. Total counts: 31
+Chosen job at 0xbaaa6b3ab4e0 out of 6 (skips: 0)
+Running job 2 (runtime 2), has been in queue 0 for 8 counts. Total counts: 32
+Chosen job at 0xbaaa6b3ab540 out of 6 (skips: 0)
+Running job 5 (runtime 43), has been in queue 0 for 7 counts. Total counts: 33
+Chosen job at 0xbaaa6b3ab520 out of 6 (skips: 0)
+Running job 4 (runtime 2), has been in queue 0 for 6 counts. Total counts: 34
+Chosen job at 0xbaaa6b3ab4c0 out of 6 (skips: 0)
+Running job 1 (runtime 10), has been in queue 0 for 5 counts. Total counts: 35
+Chosen job at 0xbaaa6b3ab500 out of 6 (skips: 0)
+Running job 3 (runtime 2), has been in queue 0 for 3 counts. Total counts: 36
+Chosen job at 0xbaaa6b3ab4a0 out of 6 (skips: 0)
+Running job 0 (runtime 12), has been in queue 0 for 8 counts. Total counts: 37
+Chosen job at 0xbaaa6b3ab4e0 out of 6 (skips: 0)
+Running job 2 (runtime 1), has been in queue 0 for 9 counts. Total counts: 38
+Chosen job at 0xbaaa6b3ab540 out of 6 (skips: 0)
+Running job 5 (runtime 42), has been in queue 0 for 8 counts. Total counts: 39
+Chosen job at 0xbaaa6b3ab520 out of 6 (skips: 0)
+Running job 4 (runtime 1), has been in queue 0 for 7 counts. Total counts: 40
+Chosen job at 0xbaaa6b3ab4c0 out of 6 (skips: 0)
+Running job 1 (runtime 9), has been in queue 0 for 6 counts. Total counts: 41
+Chosen job at 0xbaaa6b3ab500 out of 6 (skips: 0)
+Running job 3 (runtime 1), has been in queue 0 for 4 counts. Total counts: 42
+Chosen job at 0xbaaa6b3ab4a0 out of 6 (skips: 0)
+Running job 0 (runtime 11), has been in queue 0 for 9 counts. Total counts: 43
+Chosen job at 0xbaaa6b3ab4e0 out of 6 (skips: 0)
+Running job 2 (runtime 0), has been in queue 0 for 10 counts. Total counts: 44
 Job 2 completed.
-Job 1 returned to queue 0 and time in queue set to 0
+Chosen job at 0xbaaa6b3ab500 out of 5 (skips: 0)
+Running job 3 (runtime 0), has been in queue 0 for 5 counts. Total counts: 45
+Job 3 completed.
+Chosen job at 0xbaaa6b3ab540 out of 4 (skips: 0)
+Running job 5 (runtime 41), has been in queue 0 for 9 counts. Total counts: 46
+Chosen job at 0xbaaa6b3ab520 out of 4 (skips: 0)
+Running job 4 (runtime 0), has been in queue 0 for 8 counts. Total counts: 47
+Job 4 completed.
+Chosen job at 0xbaaa6b3ab4c0 out of 3 (skips: 0)
+Running job 1 (runtime 8), has been in queue 0 for 7 counts. Total counts: 48
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 10), has been in queue 0 for 10 counts. Total counts: 49
+Job 0 downgraded to queue 1.
+Chosen job at 0xbaaa6b3ab4c0 out of 2 (skips: 0)
+Running job 1 (runtime 7), has been in queue 0 for 8 counts. Total counts: 50
 Job 5 returned to queue 0 and time in queue set to 0
+Job 1 returned to queue 0 and time in queue set to 0
 Job 0 returned to queue 0 and time in queue set to 0
-Chosen job at 0xaedc4e5d44a0 out of 3 (skips: 0)
-Running job 0 (runtime 9), has been in queue 0 for 1 counts. Total counts: 50
-Chosen job at 0xaedc4e5d44c0 out of 3 (skips: 0)
-Running job 1 (runtime 5), has been in queue 0 for 1 counts. Total counts: 51
-Chosen job at 0xaedc4e5d4540 out of 3 (skips: 0)
-Running job 5 (runtime 41), has been in queue 0 for 1 counts. Total counts: 52
-Chosen job at 0xaedc4e5d44a0 out of 3 (skips: 0)
-Running job 0 (runtime 8), has been in queue 0 for 2 counts. Total counts: 53
-Chosen job at 0xaedc4e5d44c0 out of 3 (skips: 0)
-Running job 1 (runtime 4), has been in queue 0 for 2 counts. Total counts: 54
-Chosen job at 0xaedc4e5d4540 out of 
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 9), has been in queue 0 for 1 counts. Total counts: 51
+Chosen job at 0xbaaa6b3ab540 out of 3 (skips: 0)
+Running job 5 (runtime 40), has been in queue 0 for 1 counts. Total counts: 52
+Chosen job at 0xbaaa6b3ab4c0 out of 3 (skips: 0)
+Running job 1 (runtime 6), has been in queue 0 for 1 counts. Total counts: 53
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 8), has been in queue 0 for 2 counts. Total counts: 54
+Chosen job at 0xbaaa6b3ab540 out of 3 (skips: 0)
+Running job 5 (runtime 39), has been in queue 0 for 2 counts. Total counts: 55
+Chosen job at 0xbaaa6b3ab4c0 out of 3 (skips: 0)
+Running job 1 (runtime 5), has been in queue 0 for 2 counts. Total counts: 56
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 7), has been in queue 0 for 3 counts. Total counts: 57
+Chosen job at 0xbaaa6b3ab540 out of 3 (skips: 0)
+Running job 5 (runtime 38), has been in queue 0 for 3 counts. Total counts: 58
+Chosen job at 0xbaaa6b3ab4c0 out of 3 (skips: 0)
+Running job 1 (runtime 4), has been in queue 0 for 3 counts. Total counts: 59
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 6), has been in queue 0 for 4 counts. Total counts: 60
+Chosen job at 0xbaaa6b3ab540 out of 3 (skips: 0)
+Running job 5 (runtime 37), has been in queue 0 for 4 counts. Total counts: 61
+Chosen job at 0xbaaa6b3ab4c0 out of 3 (skips: 0)
+Running job 1 (runtime 3), has been in queue 0 for 4 counts. Total counts: 62
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 5), has been in queue 0 for 5 counts. Total counts: 63
+Chosen job at 0xbaaa6b3ab540 out of 3 (skips: 0)
+Running job 5 (runtime 36), has been in queue 0 for 5 counts. Total counts: 64
+Chosen job at 0xbaaa6b3ab4c0 out of 3 (skips: 0)
+Running job 1 (runtime 2), has been in queue 0 for 5 counts. Total counts: 65
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 4), has been in queue 0 for 6 counts. Total counts: 66
+Chosen job at 0xbaaa6b3ab540 out of 3 (skips: 0)
+Running job 5 (runtime 35), has been in queue 0 for 6 counts. Total counts: 67
+Chosen job at 0xbaaa6b3ab4c0 out of 3 (skips: 0)
+Running job 1 (runtime 1), has been in queue 0 for 6 counts. Total counts: 68
+Chosen job at 0xbaaa6b3ab4a0 out of 3 (skips: 0)
+Running job 0 (runtime 3), has been in queue 0 for 7 counts. Total counts: 69
+Chosen job at 0xbaaa6b3ab540 out of 3 (skips: 0)
+Running job 5 (runtime 34), has been in queue 0 for 7 counts. Total counts: 70
+Chosen job at 0xbaaa6b3ab4c0 out of 3 (skips: 0)
+Running job 1 (runtime 0), has been in queue 0 for 7 counts. Total counts: 71
+Job 1 completed.
+Chosen job at 0xbaaa6b3ab4a0 out of 2 (skips: 0)
+Running job 0 (runtime 2), has been in queue 0 for 8 counts. Total counts: 72
+Chosen job at 0xbaaa6b3ab540 out of 2 (skips: 0)
+Running job 5 (runtime 33), has been in queue 0 for 8 counts. Total counts: 73
+Chosen job at 0xbaaa6b3ab4a0 out of 2 (skips: 0)
+Running job 0 (runtime 1), has been in queue 0 for 9 counts. Total counts: 74
+Chosen job at 0xbaaa6b3ab540 out of 2 (skips: 0)
+Running job 5 (runtime 32), has been in queue 0 for 9 counts. Total counts: 75
+Chosen job at 0xbaaa6b3ab4a0 out of 2 (skips: 0)
+Running job 0 (runtime 0), has been in queue 0 for 10 counts. Total counts: 76
+Job 0 completed.
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 31), has been in queue 0 for 10 counts. Total counts: 77
+Job 5 downgraded to queue 1.
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 30), has been in queue 1 for 1 counts. Total counts: 78
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 29), has been in queue 1 for 2 counts. Total counts: 79
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 28), has been in queue 1 for 3 counts. Total counts: 80
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 27), has been in queue 1 for 4 counts. Total counts: 81
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 26), has been in queue 1 for 5 counts. Total counts: 82
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 25), has been in queue 1 for 6 counts. Total counts: 83
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 24), has been in queue 1 for 7 counts. Total counts: 84
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 23), has been in queue 1 for 8 counts. Total counts: 85
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 22), has been in queue 1 for 9 counts. Total counts: 86
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 21), has been in queue 1 for 10 counts. Total counts: 87
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 20), has been in queue 1 for 11 counts. Total counts: 88
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 19), has been in queue 1 for 12 counts. Total counts: 89
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 18), has been in queue 1 for 13 counts. Total counts: 90
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 17), has been in queue 1 for 14 counts. Total counts: 91
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 16), has been in queue 1 for 15 counts. Total counts: 92
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 15), has been in queue 1 for 16 counts. Total counts: 93
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 14), has been in queue 1 for 17 counts. Total counts: 94
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 13), has been in queue 1 for 18 counts. Total counts: 95
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 12), has been in queue 1 for 19 counts. Total counts: 96
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 11), has been in queue 1 for 20 counts. Total counts: 97
+Job 5 downgraded to queue 2.
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 10), has been in queue 2 for 1 counts. Total counts: 98
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 9), has been in queue 2 for 2 counts. Total counts: 99
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 8), has been in queue 2 for 3 counts. Total counts: 100
+Job 5 returned to queue 0 and time in queue set to 0
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 7), has been in queue 0 for 1 counts. Total counts: 101
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 6), has been in queue 0 for 2 counts. Total counts: 102
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 5), has been in queue 0 for 3 counts. Total counts: 103
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 4), has been in queue 0 for 4 counts. Total counts: 104
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 3), has been in queue 0 for 5 counts. Total counts: 105
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 2), has been in queue 0 for 6 counts. Total counts: 106
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 1), has been in queue 0 for 7 counts. Total counts: 107
+Chosen job at 0xbaaa6b3ab540 out of 1 (skips: 0)
+Running job 5 (runtime 0), has been in queue 0 for 8 counts. Total counts: 108
+Job 5 completed.

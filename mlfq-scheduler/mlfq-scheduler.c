@@ -35,6 +35,7 @@ struct Job {
 };
 
 static struct Queue sQueues[QUEUE_COUNT] = {0}; 
+static struct Job* sWaitingForEntryList = NULL;
 
 static int sCounter = 0; // This is a 'pseudo' time-slice counter variable.
                          // We do not check real run-times, but run-times as
@@ -88,8 +89,63 @@ static void ResetJobs(void)
   last->next = NULL; // Very last job
 }
 
-static void AddJobToQueue(struct Job*, int queueNum)
+static void EnterJob(struct Job* toEnter)
 {
+  struct Job* prevWaiting = sWaitingForEntryList;
+  struct Job* prevInQueue = sQueues[0].head; // Job entry is always into queue 0
+
+  // is job to enter first in wait list
+  if (prevWaiting == toEnter)
+    {
+      prevWaiting = NULL;
+    }
+  else
+    {
+      // wait list will never be null (because job to enter is in it at least)
+      // so if job to enter not head, find job preceding job to enter
+      while(prevWaiting->next != toEnter)
+	{
+	  prevWaiting = prevWaiting->next;
+	}
+    }
+
+  // check queue 0 not empty
+  if (prevInQueue != NULL)
+    {
+      // get last job in queue 0 
+      while (prevInQueue->next != NULL)
+	{
+	  prevInQueue = prevInQueue->next;
+	}
+    }
+
+  // fix pointers
+  // remove job to enter from wait list
+  if (prevWaiting != NULL)
+    {
+      prevWaiting->next = toEnter->next;
+    }
+  else
+    {
+      // lop job to enter off entry list head
+      sWaitingForEntryList = toEnter->next;
+    }
+  // insert into queue 0
+  if (prevInQueue != NULL)
+    {
+      prevInQueue->next = toEnter;
+    }
+  else
+    {
+      sQueues[0].head = toEnter;
+    }
+  // remove stale link from entered job
+  toEnter->next = NULL;
+
+  sQueues[0].numJobs++;
+
+  fprintf(outptr, "Job %d entered queue 0.\n", toEnter->jobId);
+  
 }
 
 static int CompleteJob(struct Job* cur)
@@ -197,6 +253,7 @@ static int RunMLFQScheduler(void)
 {
   int i, skips, numJobs;
   struct Job* chosenJob;
+  struct Job* jobToEnter;
 
   for (i = 0; i < QUEUE_COUNT; i++)
     {
@@ -218,6 +275,8 @@ static int RunMLFQScheduler(void)
 	  chosenJob->runTime--;
 	  chosenJob->timeInQueue++;
 
+	  sCounter++;	  
+	  
 	  fprintf(outptr, "Running job %d (runtime %d), has been in queue %d for %d counts. Total counts: %d\n",
 		 chosenJob->jobId, chosenJob->runTime, i, chosenJob->timeInQueue, sCounter);
 	  
@@ -230,7 +289,21 @@ static int RunMLFQScheduler(void)
 	      DowngradeJob(chosenJob);
 	    }
 
-	  sCounter++;
+	  // See if any jobs need to enter (reuse chosenJob for this)
+	  chosenJob = sWaitingForEntryList;
+
+	  while (chosenJob != NULL)
+	    {
+	      // We need to set chosenJob to next to avoid moving into the actual queues
+	      // and instead continue down the wait list
+	      jobToEnter = chosenJob;
+	      chosenJob = chosenJob->next;
+	      // If entry time hit
+	      if (jobToEnter->entryTime <= sCounter)
+		{
+		  EnterJob(jobToEnter);
+		}
+	    }
 
 	  return 1; // We ran something.
 	}
@@ -301,6 +374,7 @@ int main(int argc, char *argv[])
     case 2:
       char readBuffer[20];
       struct Job* lastJob = NULL;
+      struct Job* lastWaitingJob = NULL;
       int counter;
 
       char* tokPtr;
@@ -335,21 +409,36 @@ int main(int argc, char *argv[])
 	}
       curJob->entryTime = atoi(tokPtr);
       curJob->timeInQueue = 0;
-      if (lastJob != NULL)
+
+      if (curJob->entryTime == 0)
 	{
-	  lastJob->next = curJob;
+	  if (lastJob != NULL)
+	    {
+	      lastJob->next = curJob;
+	    }
+	  else
+	    {
+	      sQueues[0].head = curJob;
+	    }
+	  lastJob = curJob;
 	}
       else
 	{
-	  sQueues[0].head = curJob;
+	  if (sWaitingForEntryList == NULL)
+	    {
+	      sWaitingForEntryList = curJob;
+	    }
+	  else
+	    {
+	      lastWaitingJob->next = curJob;
+	    }
+	  lastWaitingJob = curJob;
 	}
 
       sQueues[0].numJobs++;
       counter++;
 
       fprintf(outptr, "Job %d loaded: runTime %d, entryTime %d\n", curJob->jobId, curJob->runTime, curJob->entryTime);
-	    
-      lastJob = curJob;
       }
 
       sMainState++;
