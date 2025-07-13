@@ -270,15 +270,14 @@ static int RunMLFQScheduler(void)
 	      skips--;
 	      chosenJob = chosenJob->next;
 	    }
-	  fprintf(outptr, "Chosen job at %p out of %d (skips: %d)\n", chosenJob, numJobs, skips);
 	  
 	  chosenJob->runTime--;
 	  chosenJob->timeInQueue++;
 
 	  sCounter++;	  
 	  
-	  fprintf(outptr, "Running job %d (runtime %d), has been in queue %d for %d counts. Total counts: %d\n",
-		 chosenJob->jobId, chosenJob->runTime, i, chosenJob->timeInQueue, sCounter);
+	  fprintf(outptr, "Running job %d, has been in queue %d for %d counts. Total counts: %d\n",
+		 chosenJob->jobId, i, chosenJob->timeInQueue, sCounter);
 	  
 	  if(chosenJob->runTime == 0)
 	    {
