@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+#include <stdbool.h>
 
 // This program simulates two paging techniques: LRU (Least Recently Used) and LFU (Least Frequently Used)
 // which aid in deciding which pages to page out of the cache, in the event that the cache is full and
@@ -59,11 +60,35 @@ int main(int argc, char* argv[])
 	  sState++;
 	  break;
 	case 3:
-	  // The main part. Basicially run strtok continuously to get the
+	  // The main part. Basicially run strtok continuously to get the current page.
+	  int foundPage;
+	  int i;
+
 	  while (sCurToken != NULL)
 	    {
 	      sCurPage = atoi(sCurToken);
 	      sCurToken = strtok(NULL, ",");
+
+	      foundPage = false;
+	      printf("Read page %d access from stream\n", sCurPage);
+	      
+	      for (i = 0; i < PAGE_CACHE_SIZE; i++)
+		{
+		  if (sPageCache[i].vpn == sCurPage)
+		    {
+		      foundPage = true;
+		      break;
+		    }
+		}
+
+	      if (foundPage)
+		{
+		  printf("CACHE HIT: %d in cache slot %d\n", sCurPage, i);
+		}
+	      else
+		{
+		  printf("CACHE MISS: %d\n", sCurPage);
+		}
 	    }
 	  sState++;
 	  break;
