@@ -1,0 +1,64 @@
+Read page 1 access from stream
+CACHE MISS: 1
+Read page 2 access from stream
+CACHE MISS: 2
+Read page 3 access from stream
+CACHE MISS: 3
+Read page 4 access from stream
+CACHE MISS: 4
+Read page 5 access from stream
+CACHE MISS: 5
+Read page 2 access from stream
+CACHE HIT: 2 in cache slot 1
+USE BIT SET TO 0: 2
+Read page 4 access from stream
+CACHE HIT: 4 in cache slot 3
+USE BIT SET TO 0: 4
+Read page 6 access from stream
+CACHE MISS: 6
+Read page 3 access from stream
+CACHE HIT: 3 in cache slot 2
+USE BIT SET TO 0: 3
+Read page 1 access from stream
+CACHE HIT: 1 in cache slot 0
+USE BIT SET TO 0: 1
+Read page 4 access from stream
+CACHE HIT: 4 in cache slot 3
+USE BIT SET TO 0: 4
+Read page 7 access from stream
+CACHE MISS: 7
+Read page 2 access from stream
+CACHE HIT: 2 in cache slot 1
+USE BIT SET TO 0: 2
+Read page 9 access from stream
+CACHE MISS: 9
+Read page 6 access from stream
+CACHE MISS: 6
+Read page 1 access from stream
+CACHE HIT: 1 in cache slot 0
+USE BIT SET TO 0: 1
+Read page 1 access from stream
+CACHE HIT: 1 in cache slot 0
+USE BIT SET TO 0: 1
+Read page 7 access from stream
+CACHE MISS: 7
+Read page 2 access from stream
+CACHE HIT: 2 in cache slot 1
+USE BIT SET TO 0: 2
+Read page 3 access from stream
+CACHE HIT: 3 in cache slot 2
+USE BIT SET TO 0: 3
+Read page 1 access from stream
+CACHE HIT: 1 in cache slot 0
+USE BIT SET TO 0: 1
+Read page 4 access from stream
+CACHE HIT: 4 in cache slot 3
+USE BIT SET TO 0: 4
+Read page 5 access from stream
+CACHE HIT: 5 in cache slot 4
+USE BIT SET TO 0: 5
+Read page 6 access from stream
+CACHE MISS: 6
+Read page 2 access from stream
+CACHE HIT: 2 in cache slot 1
+USE BIT SET TO 0: 2

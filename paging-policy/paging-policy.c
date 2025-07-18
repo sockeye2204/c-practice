@@ -25,6 +25,19 @@ static struct Page sPageCache[PAGE_CACHE_SIZE] = {0};
 static int sState = 0; // Program state
 static int sCurPage;
 
+static void ClockSearch(int initialIndex, int *entryPoint)
+{
+  // Use the clock algorithm to find a page to page out.
+}
+
+static void PageEnter(int pageToEnter, int entryPoint)
+{
+  sPageCache[entryPoint].vpn = pageToEnter;
+  printf("ENTERED CACHE: %d at cache slot %d\n", pageToEnter, entryPoint);
+  sPageCache[entryPoint].use = 1;
+  printf("USE BIT SET TO 1: %d\n", pageToEnter);
+}
+
 int main(int argc, char* argv[])
 {
   static FILE* sFilePtr;
@@ -62,12 +75,14 @@ int main(int argc, char* argv[])
 	case 3:
 	  // The main part. Basicially run strtok continuously to get the current page.
 	  int foundPage;
+	  int entryPoint = 0xFF;
 	  int i;
 
 	  while (sCurToken != NULL)
 	    {
 	      sCurPage = atoi(sCurToken);
 	      sCurToken = strtok(NULL, ",");
+	      entryPoint = 0xFF;
 
 	      foundPage = false;
 	      printf("Read page %d access from stream\n", sCurPage);
@@ -79,15 +94,30 @@ int main(int argc, char* argv[])
 		      foundPage = true;
 		      break;
 		    }
+		  if (sPageCache[i].vpn == 0 && entryPoint == 0xFF)
+		    entryPoint = i;
 		}
 
 	      if (foundPage)
 		{
 		  printf("CACHE HIT: %d in cache slot %d\n", sCurPage, i);
+		  // Referenced a pre-existing page, so clear the use bit.
+		  sPageCache[i].use = 0;
+		  printf("USE BIT SET TO 0: %d\n", sCurPage);
 		}
 	      else
 		{
 		  printf("CACHE MISS: %d\n", sCurPage);
+		  // Now it enters the cache.
+		  if (entryPoint != 0xFF)
+		    {
+		      PageEnter(sCurPage, entryPoint);
+		    }
+		  else
+		    {
+		      ClockSearch(rand() % PAGE_CACHE_SIZE, &entryPoint);
+		      PageEnter(sCurPage, entryPoint);
+		    }
 		}
 	    }
 	  sState++;
