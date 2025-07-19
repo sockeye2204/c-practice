@@ -14,7 +14,7 @@
 // which will be 'accessed' in the order specified.
 
 #define PAGE_CACHE_SIZE 5
-#define MAX_READ_LENGTH 100
+#define MAX_READ_LENGTH 300
 
 struct Page
 {
