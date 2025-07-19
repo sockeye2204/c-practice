@@ -127,9 +127,9 @@ int main(int argc, char* argv[])
 	      if (foundPage)
 		{
 		  printf("CACHE HIT: %d in cache slot %d\n", sCurPage, i);
-		  // Referenced a pre-existing page, so clear the use bit.
-		  sPageCache[i].use = 0;
-		  printf("USE BIT SET TO 0: %d\n", sCurPage);
+		  // Set the use bit, because this page is now recently-accessed.
+		  sPageCache[i].use = 1;
+		  printf("USE BIT SET TO 1: %d\n", sCurPage);
 		}
 	      else
 		{
