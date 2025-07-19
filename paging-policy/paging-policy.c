@@ -43,7 +43,7 @@ static void ClockSearch(int *entryPoint)
       else
 	{
 	  printf("USE BIT SET TO 0: %d in cache slot %d\n", sPageCache[index].vpn, index);
-	  sPageCache[index].use == 0;
+	  sPageCache[index].use = 0;
 	}
     }
 }
