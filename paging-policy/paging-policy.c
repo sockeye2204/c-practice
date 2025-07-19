@@ -91,10 +91,18 @@ int main(int argc, char* argv[])
 	  sState++;
 	  break;
 	case 3:
+	  int i;
+	  for (i = 0; i < PAGE_CACHE_SIZE; i++)
+	    {
+	      sPageCache[i].vpn = -1;
+	      sPageCache[i].use = 0;
+	    }
+	  sState++;
+	  break;
+	case 4:
 	  // The main part. Basicially run strtok continuously to get the current page.
 	  int foundPage;
 	  int entryPoint = 0xFF;
-	  int i;
 
 	  while (sCurToken != NULL)
 	    {
@@ -112,7 +120,7 @@ int main(int argc, char* argv[])
 		      foundPage = true;
 		      break;
 		    }
-		  if (sPageCache[i].vpn == 0 && entryPoint == 0xFF)
+		  if (sPageCache[i].vpn == -1 && entryPoint == 0xFF)
 		    entryPoint = i;
 		}
 
