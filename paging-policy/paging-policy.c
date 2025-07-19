@@ -4,6 +4,7 @@
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
+#include <assert.h>
 
 // This program simulates two paging techniques: LRU (Least Recently Used) and LFU (Least Frequently Used)
 // which aid in deciding which pages to page out of the cache, in the event that the cache is full and
@@ -25,9 +26,26 @@ static struct Page sPageCache[PAGE_CACHE_SIZE] = {0};
 static int sState = 0; // Program state
 static int sCurPage;
 
-static void ClockSearch(int initialIndex, int *entryPoint)
+static void ClockSearch(int *entryPoint)
 {
   // Use the clock algorithm to find a page to page out.
+  int i;
+  int index;
+
+  for (i = 0; i < PAGE_CACHE_SIZE; i++)
+    {
+      index = (*entryPoint + i) % PAGE_CACHE_SIZE;
+      if (sPageCache[index].use == 0)
+	{
+	  *entryPoint = index;
+	  return;
+	}
+      else
+	{
+	  printf("USE BIT SET TO 0: %d in cache slot %d\n", sPageCache[index].vpn, index);
+	  sPageCache[index].use == 0;
+	}
+    }
 }
 
 static void PageEnter(int pageToEnter, int entryPoint)
@@ -109,20 +127,24 @@ int main(int argc, char* argv[])
 		{
 		  printf("CACHE MISS: %d\n", sCurPage);
 		  // Now it enters the cache.
-		  if (entryPoint != 0xFF)
+		  if (entryPoint == 0xFF)
 		    {
-		      PageEnter(sCurPage, entryPoint);
+		      entryPoint = rand() % PAGE_CACHE_SIZE;
+		      ClockSearch(&entryPoint);		      
 		    }
-		  else
-		    {
-		      ClockSearch(rand() % PAGE_CACHE_SIZE, &entryPoint);
-		      PageEnter(sCurPage, entryPoint);
-		    }
+		  assert(entryPoint != 0xFF);
+		  PageEnter(sCurPage, entryPoint);
 		}
 	    }
 	  sState++;
 	  break;
 	default:
+	  printf("FINAL PAGE CACHE: ");
+	  for (i = 0; i < PAGE_CACHE_SIZE; i++)
+	    {
+	      printf("%d ", sPageCache[i].vpn);
+	    }
+	  printf("\n");
 	  fclose(sFilePtr);
 	  return 0;
 	}
