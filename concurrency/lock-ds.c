@@ -23,6 +23,13 @@ typedef struct _acounter {
   int threshold;
 } acounter;
 
+// Hand-over-hand linked list (actually a node)
+typedef struct _hohnode {
+  int key;
+  pthread_mutex_t lock;
+  struct _hohnode* next;
+} hohnode;
+
 // Wrappers (for catching mutex, thread function failures)
 
 void Pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *mutexattr)
@@ -63,6 +70,17 @@ void Pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict a
       fprintf(stderr, "Thread creation failed. Exiting\n");
       exit(1);
     }
+}
+
+void* Malloc(size_t size)
+{
+  void* ret = malloc(size);
+  if (ret == NULL)
+    {
+      fprintf(stderr, "Malloc failed. Exiting\n");
+      exit(1);
+    }
+  return ret;
 }
 
 // Simple counter (scounter): one lock for entire counter
@@ -130,6 +148,41 @@ int get_acounter(acounter *ac)
   int ret = ac->gval;
   Pthread_mutex_unlock(&ac->glock);
   return ret;
+}
+
+// Hand-over-hand linked list functions
+
+void init_hohnode(hohnode *hl, int key)
+{
+  hl->key = key;
+  hl->next = NULL;
+  Pthread_mutex_init(&hl->lock, NULL);
+}
+
+void* new_hohnode(int key)
+{
+  hohnode* hl = Malloc(sizeof(hohnode));
+  init_hohnode(hl, key);
+  return hl;
+}
+
+void ins_hohnode(hohnode *tgt, hohnode *nxt)
+{
+  Pthread_mutex_lock(&tgt->lock);
+  Pthread_mutex_lock(&nxt->lock);
+  int atEnd = tgt->next != NULL;
+  if (atEnd)
+    {
+      Pthread_mutex_lock(&tgt->next->lock);
+    }
+  nxt->next = tgt->next;
+  tgt->next = nxt;
+  if (atEnd)
+    {
+      Pthread_mutex_unlock(&tgt->next->lock);
+    }
+  Pthread_mutex_unlock(&tgt->lock);
+  Pthread_mutex_unlock(&nxt->lock); 
 }
 
 //
