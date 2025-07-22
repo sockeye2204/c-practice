@@ -185,6 +185,28 @@ void ins_hohnode(hohnode *tgt, hohnode *nxt)
   Pthread_mutex_unlock(&nxt->lock); 
 }
 
+hohnode* trv_hohlist(hohnode* list, int tgt_key)
+{
+  hohnode* ret = NULL;
+  if (list != NULL)
+    {
+      hohnode* cur = list;
+      Pthread_mutex_lock(&cur->lock);
+      while (cur->next != NULL)
+	{
+	  Pthread_mutex_lock(&cur->next->lock);
+	  if (cur->next->key == tgt_key)
+	    {
+	      ret = cur;
+	    }
+	  Pthread_mutex_unlock(&cur->lock);
+	  cur = cur->next;
+	}
+      Pthread_mutex_unlock(&cur->lock);
+    }
+  return(ret);
+}
+
 //
 
 void print_time(struct timeval* tv)
