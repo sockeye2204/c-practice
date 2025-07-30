@@ -1,0 +1,3 @@
+echo "Hello world!\n"
+echo "Testing one two three!\n"
+cat demo.txt
