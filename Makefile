@@ -11,7 +11,7 @@ all: $(DIRS)
 # Compiler settings
 # ----------------------------
 CC := gcc
-CFLAGS := -Wall -Wextra -O2
+CFLAGS := -Wall -Wextra -O2 -D_GNU_SOURCE
 
 # ----------------------------
 # General directories (except checksum and tlpi)
