@@ -49,14 +49,14 @@ int main(int argc, char* argv[])
       
       readed = read(fd_in, buf, READ_BUF);
       if (readed == -1) {
-	fprintf(stderr, "read error\n");
-  	  exit(1);
+	perror("read");
+	exit(1);
       }
 
-      written = write(fd_out, buf, READ_BUF);
+      written = write(fd_out, buf, readed);
       if (written == -1) {
-	fprintf(stderr, "write error\n");
-  	  exit(1);
+	perror("write");
+	exit(1);
       }
 
       printf("I read %d bytes, wrote %d bytes\n", readed, written);
@@ -69,22 +69,29 @@ int main(int argc, char* argv[])
       new_off = lseek(fd_in, old_off, SEEK_HOLE);
       if (new_off == -1)
 	{
-	  fprintf(stderr, "seek error\n");
-  	  exit(1);
+	  perror("lseek SEEK_HOLE");
+	  break;
 	}
+      
       printf("New offset %x\n", new_off);
       off_t diff = (new_off - old_off);
       printf("Diff %x\n", diff);
 
-      if (new_off == 0xFFFFFFFF)
-	{
-	  printf("Breaking\n");
-	  break;
-	}
+      if(lseek(fd_out, diff, SEEK_CUR) == -1) {
+	perror("lseek fd_out");
+	exit(1);
+      }
+
+      if(lseek(fd_in, new_off, SEEK_SET) == -1) {
+	perror("lseek fd_in after hole");
+	exit(1);
+      }
 
       
     }
 
+  close(fd_in);
+  close(fd_out);
 
   exit(EXIT_SUCCESS);
 }
