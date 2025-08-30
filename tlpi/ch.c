@@ -26,14 +26,16 @@ int main(int argc, char* argv[])
 	    S_IRUSR | S_IWUSR | S_IRGRP | S_IRUSR |
 	    S_IROTH | S_IWOTH);
   if (fd_in == -1) {
-    fprintf(stderr, "Error: failed to open %s\n", argv[1]);
+    perror("open input");
+    exit(1);
   }  
   
   fd_out = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC,
 	    S_IRUSR | S_IWUSR | S_IRGRP | S_IRUSR |
 	    S_IROTH | S_IWOTH);
   if (fd_out == -1) {
-    fprintf(stderr, "Error: failed to open %s\n", argv[2]);
+    perror("open output");
+    exit(1);
   }
 
   // General idea is to read (and then write) data until
@@ -53,16 +55,18 @@ int main(int argc, char* argv[])
 	exit(1);
       }
 
-      written = write(fd_out, buf, readed);
-      if (written == -1) {
-	perror("write");
-	exit(1);
-      }
-
-      printf("I read %d bytes, wrote %d bytes\n", readed, written);
-
       if (readed > 0)
-	continue;
+	{
+	  written = write(fd_out, buf, readed);
+	  if (written == -1) {
+	    perror("write");
+	    exit(1);
+	  }
+	  continue;
+	}
+
+      //      printf("I read %d bytes, wrote %d bytes\n", readed, written);
+
 
       // Read for holes
       
@@ -73,9 +77,9 @@ int main(int argc, char* argv[])
 	  break;
 	}
       
-      printf("New offset %x\n", new_off);
-      off_t diff = (new_off - old_off);
-      printf("Diff %x\n", diff);
+      //      printf("New offset %x\n", new_off);
+      //      off_t diff = (new_off - old_off);
+      //      printf("Diff %x\n", diff);
 
       if(lseek(fd_out, diff, SEEK_CUR) == -1) {
 	perror("lseek fd_out");
